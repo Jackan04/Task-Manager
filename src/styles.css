@@ -1,0 +1,88 @@
+:root{
+    --color-main: #ffff;
+    --color-secondary: #CCDEFC;
+    --color-accent: #074095;
+    --color-success: #D5F5D9;
+    --color-danger: #FACDD7;
+    --color-text: #202225;
+    --color-border: #ccc;
+    --color-sidebar: #F0F0F2;
+    
+    --space-small: 15px;
+    --space-large: 30px;
+    --space-button: 12px 18px;
+
+    --border-radius: 10px;
+
+    --font-size-h1: 2rem;
+    --font-size-h2: 1.75rem;
+    --font-size-h3: 1.5rem;
+    --font-size-h4: 1.25rem;
+    --font-size-body: 1rem;
+    --font-size-small: 0.875rem;
+    --font-size-caption: 0.75rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: minmax(150px, 300px) 1fr;
+    height: 100vh;
+    font-family: sans-serif;
+
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+p, li{
+    font-size: var(--font-size-body);
+}
+
+button{
+    font-size: var(--font-size-body);
+    border: none;
+    padding: var(--space-button);
+    border-radius: var(--border-radius);
+}
+
+#btn-new-project{
+    background-color: var(--color-secondary);
+    color: var(--color-accent);
+}
+
+nav{
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 4rem;
+    padding: var(--space-large);
+    background-color: var(--color-sidebar);
+
+
+}
+
+ul{
+    list-style: none;
+}
+
+#navbar-header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+}
+
+#projects-list{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-large);
+}
+
