@@ -12,7 +12,7 @@
     --space-large: 30px;
     --space-button: 12px 18px;
 
-    --border-radius: 10px;
+    --border-radius: 8px;
 
     --font-size-h1: 2rem;
     --font-size-h2: 1.75rem;
@@ -54,7 +54,7 @@ button{
     border-radius: var(--border-radius);
 }
 
-#btn-new-project{
+.btn-neutral{
     background-color: var(--color-secondary);
     color: var(--color-accent);
 }
