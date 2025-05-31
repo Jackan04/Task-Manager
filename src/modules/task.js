@@ -1,12 +1,12 @@
 class Task {
     
-    constructor(title, notes, date, projectID){
+    constructor(title, notes, date, projectId){
         this.id = crypto.randomUUID(),
         this.title = title,
         this.notes = notes,
         this.isCompleted = false,
         this.date = date,
-        this.projectID = projectID
+        this.projectId = projectId
     }
 
     set title(newTitle){

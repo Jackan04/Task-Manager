@@ -1,5 +1,10 @@
 import "./styles.css" 
 import Task from "./modules/task"
+import { addNewTask, deleteTask } from "./modules/taskManager"
 
-const newTask = new Task("Take out the trash!")
-console.log(newTask.title)
+const newTask = addNewTask("Hello World!")
+newTask.toggleCompleted()
+
+deleteTask(newTask.id)
+
+
