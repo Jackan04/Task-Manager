@@ -7,9 +7,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   mode: 'development',
-  
   devServer: {
-  static: './dist',
+    static: './dist',
     open: false,
-},
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,     
+        use: ['style-loader', 'css-loader'], 
+      },
+    ],
+  },
 };
