@@ -21,6 +21,8 @@
     --font-size-body: 1rem;
     --font-size-small: 0.875rem;
     --font-size-caption: 0.75rem;
+
+    --transition: 0.2s ease-in-out;
 }
 
 * {
@@ -30,11 +32,10 @@
 }
 
 body{
+    font-family: 'Inter', sans-serif;
     display: grid;
     grid-template-columns: minmax(150px, 300px) 1fr;
     height: 100vh;
-    font-family: sans-serif;
-
     line-height: 1.5;
     font-weight: 400;
 }
@@ -52,11 +53,17 @@ button{
     border: none;
     padding: var(--space-button);
     border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+button:hover{
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
 }
 
 .btn-neutral{
     background-color: var(--color-secondary);
     color: var(--color-accent);
+    cursor: pointer;
 }
 
 nav{
@@ -83,6 +90,17 @@ ul{
 #projects-list{
     display: flex;
     flex-direction: column;
-    gap: var(--space-large);
+    gap: var(--space-small);
+    
 }
+
+.sidebar-item:hover{
+    width: fit-content;
+    color: var(--color-accent);
+    cursor: pointer;
+}
+
+
+
+
 

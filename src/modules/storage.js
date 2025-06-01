@@ -21,6 +21,14 @@ const taskStorage = {
 
 const projectStorage = {
 
+    save: (projects) => {
+         localStorage.setItem("projects", JSON.stringify(projects));
+        console.log("Projects saved!");
+    },
+
+    load: (projects) => {
+        
+    }
 }
 
-export {taskStorage}
+export {taskStorage, projectStorage}
