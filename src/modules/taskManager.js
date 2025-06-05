@@ -1,9 +1,10 @@
 import Task from "./task"
 import { taskStorage, projectStorage } from "./storage"
 import { Project } from "./project"
+import { renderProjectsList } from "./ui"
 
-const tasks = []
-const projects = []
+const tasks = taskStorage.load()
+const projects = projectStorage.load()
 
 function addNewTask(title, notes, date, projectId){
     const newTask = new Task(title, notes, date, projectId)
@@ -26,7 +27,7 @@ function createNewProject(title){
     projects.push(newProject)
     projectStorage.save(projects)
     console.log(`${newProject.title} was created.`)
-
+    renderProjectsList()
 
 }
 

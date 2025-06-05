@@ -1,4 +1,5 @@
 import { createNewProject } from "./taskManager"
+import { projectStorage, taskStorage } from "./storage"
 
 const body = document.querySelector("body")
 let currentProject = ""
@@ -42,19 +43,23 @@ function renderNewProjectForm(){
 
         buttonAddProject.addEventListener("click", () =>{
             createNewProject(inputTitle.value)
+            form.close()
         })
     
 
 }
 
-function renderProjectList(){
-        projects.forEach(project => {
-        const listItem = document.createElement("li")
-        listItem.textContent = project.title
-        projectList.appendChild(listItem)
+function renderProjectsList() {
+    const projectsList = document.querySelector("#projects-list");
+    projectsList.innerHTML = "";
+    const projects = projectStorage.load(); 
+    
+    projects.forEach(project => {
+        const listItem = document.createElement("li");
+        listItem.textContent = project._title;
+        projectsList.appendChild(listItem);
     });
 }
-
 
 
 function setupEventListeners(){
@@ -69,5 +74,5 @@ function setupEventListeners(){
 
 }
 
-export {setupEventListeners}
+export {setupEventListeners, renderProjectsList}
 

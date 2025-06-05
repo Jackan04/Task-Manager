@@ -26,8 +26,17 @@ const projectStorage = {
         console.log("Projects saved!");
     },
 
-    load: (projects) => {
-        
+    load: () => {
+         const projectsData = localStorage.getItem("projects");
+        if (!projectsData) {
+            return [];
+        }
+        try {
+            return JSON.parse(projectsData);
+        } catch (error) {
+            console.error("Failed to load projects from localStorage:", error);
+            return [];
+        }
     }
 }
 
