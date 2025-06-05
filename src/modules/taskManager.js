@@ -43,5 +43,12 @@ function createNewProject(title){
 
 }
 
+function deleteProject(projectId){
+    const projectsToKeep = projects.filter((project) => project.id !== projectId)
+    const tasksToKeep = tasks.filter((task) => task.projectId !== projectId)
+    projectStorage.save(projectsToKeep)
+    taskStorage.save(tasksToKeep)
+}
 
-export {addNewTask, deleteTask, createNewProject}
+
+export {addNewTask, deleteTask, createNewProject, deleteProject}

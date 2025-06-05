@@ -1,6 +1,10 @@
-:root{
+/* =========================
+   Root Variables & Resets
+   ========================= */
+:root {
     --color-main: #ffff;
     --color-secondary: #CCDEFC;
+    --color-secondary-light: #e6f0fa;
     --color-text-neutral: #074095;
     --color-success: #D5F5D9;
     --color-danger: #FACDD7;
@@ -9,7 +13,7 @@
     --text-color-danger: #A30D30;
     --color-border: #ccc;
     --color-sidebar: #F0F0F2;
-    
+
     --space-small: 15px;
     --space-large: 30px;
     --space-button: 12px 18px;
@@ -33,7 +37,10 @@
     box-sizing: border-box;
 }
 
-body{
+/* =========================
+   Layout
+   ========================= */
+body {
     font-family: 'Inter', sans-serif;
     display: grid;
     grid-template-columns: minmax(150px, 270px) 1fr;
@@ -42,68 +49,58 @@ body{
     font-weight: 400;
 }
 
-#app{
+#app {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     flex-wrap: wrap;
-
 }
 
-#task-list{
-    margin: 2rem;
+/* =========================
+   Sidebar & Navigation
+   ========================= */
+nav {
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 4rem;
+    padding: var(--space-large);
+    background-color: var(--color-sidebar);
+}
+
+#navbar-header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    gap: 30px;
+}
+
+#projects-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-small);
 }
 
-input[type="checkbox"]{
-    appearance: none;
-    padding: 10px;
-    border-radius: 100%;
-    border: solid 2px #ccc;
+.project-list-item {
+    padding: 7px;
+    border-radius: var(--border-radius);
+}
+
+.project-list-item:hover {
     cursor: pointer;
-    
+    background-color: #DEE0E4;
 }
 
-.task-item{
-    display: flex;
-    gap: 15px;
+.project-list-item.active {
+    background-color: var(--color-secondary-light);
+    font-weight: bold;
+    border-left: 4px solid var(--color-secondary);
 }
 
-.task-item.completed{
-    text-decoration: line-through;
-    opacity: 0.7;
-}
-
-input[type="checkbox"].completed{
-    background-color: #ccc;
-}
-
-
-
-header{
-    width: 100%;
-    background-color: var(--color-secondary);
-    color: var(--color-text-neutral);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: var(--space-large);
-    margin-bottom: 1rem;
-
-}
-
-h1, h2, h3 {
-  font-weight: 600;
-}
-
-p, li{
-    font-size: var(--font-size-body);
-}
-
-button{
+/* =========================
+   Buttons
+   ========================= */
+button {
     font-size: var(--font-size-body);
     border: none;
     padding: var(--space-button);
@@ -111,107 +108,103 @@ button{
     transition: var(--transition);
 }
 
-.color-danger{
-    background-color: var(--color-danger);
-    color: var(--text-color-danger);
-}
-
-.color-success{
-    background-color: var(--color-success);
-    color: var(--text-color-sucess);
-}
-
-button:hover{
+button:hover,
+input:hover {
+    opacity: 0.7;
     cursor: pointer;
 }
 
-button:hover, input:hover{
-    opacity: 0.7;
-}
-
-.btn-neutral{
+.btn-neutral {
     background-color: var(--color-secondary);
     color: var(--color-text-neutral);
-    
 }
 
-.btn-danger{
+.btn-danger,
+.color-danger {
     background-color: var(--color-danger);
     color: var(--text-color-danger);
 }
 
-.btn-success{
+.btn-success,
+.color-success {
     background-color: var(--color-success);
     color: var(--text-color-success);
 }
 
-nav{
-    display: grid;
-    grid-template-rows: auto 1fr 1fr;
-    gap: 4rem;
-    padding: var(--space-large);
-    background-color: var(--color-sidebar);
-
-
+/* =========================
+   Task List & Items
+   ========================= */
+#task-list {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
 }
 
-.project-list-item{
-    padding: 7px;
-    border-radius: var(--border-radius);
+.task-item {
+    display: flex;
+    gap: 15px;
 }
 
-.project-list-item:hover{
+.task-item.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* =========================
+   Checkbox Styling
+   ========================= */
+input[type="checkbox"] {
+    appearance: none;
+    padding: 10px;
+    border-radius: 100%;
+    border: solid 2px #ccc;
     cursor: pointer;
-    background-color: #DEE0E4;
 }
 
-ul{
-    list-style: none;
+input[type="checkbox"].completed {
+    background-color: #ccc;
 }
 
-dialog{
-
+/* =========================
+   Forms & Dialogs
+   ========================= */
+dialog {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     border: none;
     border-radius: var(--border-radius);
-    
-    z-index: 9999; 
+    z-index: 9999;
     background: white;
     padding: 2rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
 }
 
-dialog > div{
-       display: flex;
-       gap: var(--space-small);
+dialog > div {
+    display: flex;
+    gap: var(--space-small);
 }
 
-input:not([type="checkbox"]){
-    border: none;
+#newTaskForm {
+    width: 500px;
+}
+
+#newTaskForm > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================
+   Inputs & Textareas
+   ========================= */
+input:not([type="checkbox"]) {
     border: 2px #ccc solid;
     border-radius: var(--border-radius);
     padding: var(--space-small);
     font-size: 16px;
     transition: var(--transition);
-    font-family: 'Inter', sans-serif;
-}
-
-textarea{
-     border: none;
-    border: 2px #ccc solid;
-    border-radius: var(--border-radius);
-    padding: var(--space-small);
-    font-size: 16px;
-    transition: var(--transition);
-    max-width: 100%;
-    min-width: 100%;
-    max-height: fit-content;
-    min-height: fit-content;
     font-family: 'Inter', sans-serif;
 }
 
@@ -221,43 +214,57 @@ textarea:focus {
     border: 3px solid var(--color-secondary);
 }
 
-#navbar-header{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+textarea {
+    border: 2px #ccc solid;
+    border-radius: var(--border-radius);
+    padding: var(--space-small);
+    font-size: 16px;
+    transition: var(--transition);
+    max-width: 100%;
+    min-width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+/* =========================
+   Headers & Typography
+   ========================= */
+header {
     width: 100%;
-    gap: 30px;
-}
-
-#projects-list{
+    background-color: var(--color-secondary);
+    color: var(--color-text-neutral);
     display: flex;
-    flex-direction: column;
-    gap: var(--space-small);
-    
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: var(--space-large);
+    margin-bottom: 1rem;
 }
 
-.sidebar-item:hover{
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+p, li {
+    font-size: var(--font-size-body);
+}
+
+/* =========================
+   Utility
+   ========================= */
+ul {
+    list-style: none;
+}
+
+.sidebar-item:hover {
     width: fit-content;
     color: var(--color-text-neutral);
     cursor: pointer;
 }
 
-#btn-new-task{
+#btn-new-task {
     position: absolute;
     right: 20px;
     bottom: 20px;
-    
-}
-
-#newTaskForm{
-    width: 500px;
-}
-
-
-#newTaskForm > div{
-    display: flex;
-    flex-direction: column;
-
 }
 
 

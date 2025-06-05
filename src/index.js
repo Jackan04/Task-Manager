@@ -7,7 +7,6 @@ import { projectStorage, taskStorage } from "./modules/storage"
 
 
 renderProjectsList()
-setupEventListeners()
 
 
 

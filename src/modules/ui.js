@@ -1,52 +1,50 @@
-import { createNewProject } from "./taskManager"
+import { createNewProject, addNewTask, deleteProject } from "./taskManager"
 import { projectStorage, taskStorage } from "./storage"
-import { addNewTask } from "./taskManager"
-import Task from "./task"
 
 const body = document.querySelector("body")
- const app = document.querySelector("#app")
+const app = document.querySelector("#app")
 let currentProject = ""
 
-function renderNewProjectForm(){
-
-        const form = document.createElement("dialog")
-        const formContent = document.createElement("div")
-        const inputTitle = document.createElement("input")
-        const buttonAddProject = document.createElement("button")
-        const buttonCloseForm = document.createElement("button")
-
-        buttonAddProject.textContent = "Add"
-        buttonCloseForm.textContent = "Close"
-        inputTitle.placeholder = "Enter project title"
-
-        form.setAttribute("id", "newProjectForm")
-        inputTitle.setAttribute("id", "inputProjectTitle")
-        buttonAddProject.setAttribute("id", "buttonAddProject")
-        buttonCloseForm.setAttribute("class", "btn-danger")
-        buttonAddProject.setAttribute("class", "btn-success")
-
-        formContent.appendChild(inputTitle)
-        formContent.appendChild(buttonAddProject)
-        formContent.appendChild(buttonCloseForm)
-
-        form.appendChild(formContent)
-        body.appendChild(form)
-        form.showModal()
-
-        buttonCloseForm.addEventListener("click", () => {
-        form.close()
-        form.remove()
-        })
-
-        buttonAddProject.addEventListener("click", () =>{
-            createNewProject(inputTitle.value)
-            form.close()
-        })
-    
-
+function clearAndCloseForm(form) {
+    form.close()
+    form.remove()
 }
 
-function renderProjectPage(projectTitle, projectId){
+function renderNewProjectForm() {
+    const form = document.createElement("dialog")
+    const formContent = document.createElement("div")
+    const inputTitle = document.createElement("input")
+    const buttonAddProject = document.createElement("button")
+    const buttonCloseForm = document.createElement("button")
+
+    buttonAddProject.textContent = "Add"
+    buttonCloseForm.textContent = "Close"
+    inputTitle.placeholder = "Enter project title"
+
+    form.setAttribute("id", "newProjectForm")
+    inputTitle.setAttribute("id", "inputProjectTitle")
+    buttonAddProject.setAttribute("id", "buttonAddProject")
+    buttonCloseForm.setAttribute("class", "btn-danger")
+    buttonAddProject.setAttribute("class", "btn-success")
+
+    formContent.appendChild(inputTitle)
+    formContent.appendChild(buttonAddProject)
+    formContent.appendChild(buttonCloseForm)
+
+    form.appendChild(formContent)
+    body.appendChild(form)
+    form.showModal()
+
+    buttonCloseForm.addEventListener("click", () => clearAndCloseForm(form))
+
+    buttonAddProject.addEventListener("click", () => {
+        createNewProject(inputTitle.value)
+        clearAndCloseForm(form)
+        renderProjectsList()
+    })
+}
+
+function renderProjectPage(projectTitle, projectId) {
     app.innerHTML = ""
     const pageHeader = document.createElement("header")
     const pageTitle = document.createElement("h1")
@@ -69,28 +67,27 @@ function renderProjectPage(projectTitle, projectId){
     app.appendChild(pageHeader)
     app.appendChild(buttonAddNewTask)
     app.appendChild(taskList)
-    
+
     currentProject = projectId
-    taskList = renderTasks(currentProject)
+    renderTasks(currentProject)
 
-
-    
-    console.log(`Current project is: ${projectTitle} with the id of ${projectId}`)
-    
-    
     buttonAddNewTask.addEventListener("click", renderNewTaskForm)
-    
-
-
+    buttonDeleteProject.addEventListener("click", () => {
+                const confirmation = confirm("This will permanently delete the project and all it's tasks. Are you sure you want to continue?")
+        if (confirmation) {
+            deleteProject(currentProject)
+            renderProjectsList()
+            app.innerHTML = "" 
+        }
+    })
 }
 
-function renderTasks(projectId){
+function renderTasks(projectId) {
     const taskList = document.querySelector("#task-list")
     taskList.innerHTML = ""
     const tasks = taskStorage.load()
     const projectTasks = tasks.filter((task) => task.projectId === projectId)
-    
-    
+
     projectTasks.forEach(task => {
         const listItem = document.createElement("li")
         listItem.setAttribute("class", "task-item")
@@ -112,26 +109,21 @@ function renderTasks(projectId){
         listItem.appendChild(titleSpan)
         taskList.appendChild(listItem)
 
+        checkbox.addEventListener("click", () => {
+            task.isCompleted = !task.isCompleted
+            listItem.classList.toggle("completed", task.isCompleted)
+            checkbox.classList.toggle("completed", task.isCompleted)
 
-        checkbox.addEventListener("click", () =>{
-            if(task.isCompleted){
-                task.isCompleted = false
-                taskStorage.save(tasks)
-                listItem.classList.remove("completed")
-                checkbox.classList.remove("completed")
-                
-            }else{
-                task.isCompleted = true
-                listItem.classList.add("completed")
-                checkbox.classList.add("completed")
-                taskStorage.save(tasks)
+            // Update and save all tasks
+            const allTasks = taskStorage.load()
+            const idx = allTasks.findIndex(t => t.id === task.id)
+            if (idx !== -1) {
+                allTasks[idx].isCompleted = task.isCompleted
+                taskStorage.save(allTasks)
             }
         })
-
-})
-
+    })
 }
-
 
 function renderNewTaskForm() {
     const form = document.createElement("dialog")
@@ -167,8 +159,7 @@ function renderNewTaskForm() {
     form.showModal()
 
     buttonCloseForm.addEventListener("click", () => {
-        form.close()
-        form.remove()
+        clearAndCloseForm(form)
         renderTasks(currentProject)
     })
 
@@ -179,44 +170,34 @@ function renderNewTaskForm() {
             inputDate.value,
             currentProject
         )
-        form.close()
-        form.remove()
+        clearAndCloseForm(form)
         renderTasks(currentProject)
     })
 }
 
-
 function renderProjectsList() {
+    const buttonAddNewProject = document.querySelector("#btn-new-project")
     const projectsList = document.querySelector("#projects-list")
     projectsList.innerHTML = ""
-    const projects = projectStorage.load() 
-    
+    const projects = projectStorage.load()
+
     projects.forEach(project => {
         const listItem = document.createElement("li")
         listItem.textContent = project._title
         listItem.setAttribute("class", "project-list-item")
         listItem.dataset.id = project.id
+        
+       
+        
         projectsList.appendChild(listItem)
-
-        listItem.addEventListener("click", () =>{
+        listItem.addEventListener("click", () => {
             const projectId = listItem.dataset.id
             renderProjectPage(project._title, projectId)
         })
     })
+
+    buttonAddNewProject.addEventListener("click", renderNewProjectForm)
 }
 
-
-function setupEventListeners(){
-    
-    const buttonAddNewProject = document.querySelector("#btn-new-project")
-    buttonAddNewProject.addEventListener("click", () =>{
-        renderNewProjectForm()
-    })
-    
-   
- 
-
-}
-
-export {setupEventListeners, renderProjectsList, renderProjectPage}
+export {renderProjectsList, renderProjectPage }
 
