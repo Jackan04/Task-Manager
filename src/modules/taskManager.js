@@ -48,6 +48,7 @@ function deleteProject(projectId){
     const tasksToKeep = tasks.filter((task) => task.projectId !== projectId)
     projectStorage.save(projectsToKeep)
     taskStorage.save(tasksToKeep)
+    projects.push(projectsToKeep)
 }
 
 

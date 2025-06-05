@@ -71,6 +71,7 @@ function renderProjectPage(projectTitle, projectId) {
     currentProject = projectId
     renderTasks(currentProject)
 
+
     buttonAddNewTask.addEventListener("click", renderNewTaskForm)
     buttonDeleteProject.addEventListener("click", () => {
                 const confirmation = confirm("This will permanently delete the project and all it's tasks. Are you sure you want to continue?")
@@ -87,6 +88,12 @@ function renderTasks(projectId) {
     taskList.innerHTML = ""
     const tasks = taskStorage.load()
     const projectTasks = tasks.filter((task) => task.projectId === projectId)
+
+    if(projectTasks.length === 0){
+        const noTasksMessage = document.createElement("p")
+        noTasksMessage.textContent = "No tasks in this project yet, create on with the help of the button in the bottom right corner."
+        app.appendChild(noTasksMessage)
+    }
 
     projectTasks.forEach(task => {
         const listItem = document.createElement("li")
@@ -114,7 +121,6 @@ function renderTasks(projectId) {
             listItem.classList.toggle("completed", task.isCompleted)
             checkbox.classList.toggle("completed", task.isCompleted)
 
-            // Update and save all tasks
             const allTasks = taskStorage.load()
             const idx = allTasks.findIndex(t => t.id === task.id)
             if (idx !== -1) {
@@ -187,10 +193,13 @@ function renderProjectsList() {
         listItem.setAttribute("class", "project-list-item")
         listItem.dataset.id = project.id
         
-       
-        
         projectsList.appendChild(listItem)
         listItem.addEventListener("click", () => {
+            document.querySelectorAll('.project-list-item').forEach(item => {
+                item.classList.remove('active')
+            })
+            listItem.classList.add('active')
+
             const projectId = listItem.dataset.id
             renderProjectPage(project._title, projectId)
         })
