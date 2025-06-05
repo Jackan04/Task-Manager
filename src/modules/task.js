@@ -33,17 +33,6 @@ class Task {
         return this._date
     }
 
-    toggleCompleted(){
-
-        if(this.isCompleted === false){
-            this.isCompleted = true
-        }else{
-            this.isCompleted = false
-        }
-
-        return this.isCompleted
-    }
-
 
 }
 

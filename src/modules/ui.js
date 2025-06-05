@@ -1,6 +1,7 @@
 import { createNewProject } from "./taskManager"
 import { projectStorage, taskStorage } from "./storage"
 import { addNewTask } from "./taskManager"
+import Task from "./task"
 
 const body = document.querySelector("body")
  const app = document.querySelector("#app")
@@ -86,20 +87,48 @@ function renderProjectPage(projectTitle, projectId){
 function renderTasks(projectId){
     const taskList = document.querySelector("#task-list")
     taskList.innerHTML = ""
-    
-    
     const tasks = taskStorage.load()
     const projectTasks = tasks.filter((task) => task.projectId === projectId)
     
     
     projectTasks.forEach(task => {
         const listItem = document.createElement("li")
-        listItem.textContent = task._title
         listItem.setAttribute("class", "task-item")
         listItem.dataset.id = task.id
+
+        const checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        checkbox.checked = task.isCompleted
+
+        if (task.isCompleted) {
+            listItem.classList.add("completed")
+            checkbox.classList.add("completed")
+        }
+
+        const titleSpan = document.createElement("span")
+        titleSpan.textContent = task._title
+
+        listItem.appendChild(checkbox)
+        listItem.appendChild(titleSpan)
         taskList.appendChild(listItem)
 
-    })
+
+        checkbox.addEventListener("click", () =>{
+            if(task.isCompleted){
+                task.isCompleted = false
+                taskStorage.save(tasks)
+                listItem.classList.remove("completed")
+                checkbox.classList.remove("completed")
+                
+            }else{
+                task.isCompleted = true
+                listItem.classList.add("completed")
+                checkbox.classList.add("completed")
+                taskStorage.save(tasks)
+            }
+        })
+
+})
 
 }
 
@@ -140,7 +169,7 @@ function renderNewTaskForm() {
     buttonCloseForm.addEventListener("click", () => {
         form.close()
         form.remove()
-        renderTasks()
+        renderTasks(currentProject)
     })
 
     buttonAddTask.addEventListener("click", () => {
