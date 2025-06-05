@@ -22,7 +22,7 @@ const taskStorage = {
 const projectStorage = {
 
     save: (projects) => {
-         localStorage.setItem("projects", JSON.stringify(projects));
+        localStorage.setItem("projects", JSON.stringify(projects));
         console.log("Projects saved!");
     },
 

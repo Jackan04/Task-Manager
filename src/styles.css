@@ -1,10 +1,12 @@
 :root{
     --color-main: #ffff;
     --color-secondary: #CCDEFC;
-    --color-accent: #074095;
+    --color-text-neutral: #074095;
     --color-success: #D5F5D9;
     --color-danger: #FACDD7;
     --color-text: #202225;
+    --text-color-sucess: #2F943B;
+    --text-color-danger: #A30D30;
     --color-border: #ccc;
     --color-sidebar: #F0F0F2;
     
@@ -56,14 +58,28 @@ button{
     transition: var(--transition);
 }
 
+.color-danger{
+    background-color: var(--color-danger);
+    color: var(--text-color-danger);
+}
+
+.color-success{
+    background-color: var(--color-success);
+    color: var(--text-color-sucess);
+}
+
 button:hover{
-    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+}
+
+button:hover, input:hover{
+    opacity: 0.7;
 }
 
 .btn-neutral{
     background-color: var(--color-secondary);
-    color: var(--color-accent);
-    cursor: pointer;
+    color: var(--color-text-neutral);
+    
 }
 
 nav{
@@ -78,6 +94,46 @@ nav{
 
 ul{
     list-style: none;
+}
+
+dialog{
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: none;
+    border-radius: var(--border-radius);
+    
+    z-index: 9999; 
+    background: white;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+}
+
+dialog > div{
+       display: flex;
+       gap: var(--space-small);
+}
+
+input{
+    border: none;
+    border: 2px #ccc solid;
+    border-radius: var(--border-radius);
+    padding: var(--space-small);
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+
+
+input:focus{
+    outline: none;
+    border: 3px solid var(--color-secondary);
+    
+
 }
 
 #navbar-header{
@@ -96,7 +152,7 @@ ul{
 
 .sidebar-item:hover{
     width: fit-content;
-    color: var(--color-accent);
+    color: var(--color-text-neutral);
     cursor: pointer;
 }
 

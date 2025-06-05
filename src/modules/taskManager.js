@@ -26,6 +26,8 @@ function createNewProject(title){
     projects.push(newProject)
     projectStorage.save(projects)
     console.log(`${newProject.title} was created.`)
+
+
 }
 
 export {addNewTask, deleteTask, createNewProject}
