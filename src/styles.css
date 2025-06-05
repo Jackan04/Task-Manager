@@ -5,7 +5,7 @@
     --color-success: #D5F5D9;
     --color-danger: #FACDD7;
     --color-text: #202225;
-    --text-color-sucess: #2F943B;
+    --text-color-success: #2F943B;
     --text-color-danger: #A30D30;
     --color-border: #ccc;
     --color-sidebar: #F0F0F2;
@@ -36,10 +36,25 @@
 body{
     font-family: 'Inter', sans-serif;
     display: grid;
-    grid-template-columns: minmax(150px, 300px) 1fr;
+    grid-template-columns: minmax(150px, 270px) 1fr;
     height: 100vh;
     line-height: 1.5;
     font-weight: 400;
+}
+
+
+
+header{
+    width: 100%;
+    background-color: var(--color-secondary);
+    color: var(--color-text-neutral);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: var(--space-large);
+    margin-bottom: 1rem;
+
 }
 
 h1, h2, h3 {
@@ -82,6 +97,16 @@ button:hover, input:hover{
     
 }
 
+.btn-danger{
+    background-color: var(--color-danger);
+    color: var(--text-color-danger);
+}
+
+.btn-success{
+    background-color: var(--color-success);
+    color: var(--text-color-success);
+}
+
 nav{
     display: grid;
     grid-template-rows: auto 1fr 1fr;
@@ -90,6 +115,16 @@ nav{
     background-color: var(--color-sidebar);
 
 
+}
+
+.project-list-item{
+    padding: 7px;
+    border-radius: var(--border-radius);
+}
+
+.project-list-item:hover{
+    cursor: pointer;
+    background-color: #DEE0E4;
 }
 
 ul{
@@ -156,6 +191,12 @@ input:focus{
     cursor: pointer;
 }
 
+#btn-new-task{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    
+}
 
 
 
