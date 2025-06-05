@@ -9,9 +9,5 @@ import { projectStorage, taskStorage } from "./modules/storage"
 renderProjectsList()
 setupEventListeners()
 
-const newTask = addNewTask("Hello World!")
-newTask.toggleCompleted()
-
-deleteTask(newTask.id)
 
 

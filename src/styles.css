@@ -160,11 +160,28 @@ input{
     padding: var(--space-small);
     font-size: 16px;
     transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+}
+
+textarea{
+     border: none;
+    border: 2px #ccc solid;
+    border-radius: var(--border-radius);
+    padding: var(--space-small);
+    font-size: 16px;
+    transition: var(--transition);
+    max-width: 100%;
+    min-width: 100%;
+    max-height: fit-content;
+    min-height: fit-content;
+    font-family: 'Inter', sans-serif;
 }
 
 
 
-input:focus{
+
+
+input:focus, textarea:focus{
     outline: none;
     border: 3px solid var(--color-secondary);
     
@@ -173,7 +190,8 @@ input:focus{
 
 #navbar-header{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
     width: 100%;
     gap: 30px;
 }
@@ -196,6 +214,17 @@ input:focus{
     right: 20px;
     bottom: 20px;
     
+}
+
+#newTaskForm{
+    width: 500px;
+}
+
+
+#newTaskForm > div{
+    display: flex;
+    flex-direction: column;
+
 }
 
 
