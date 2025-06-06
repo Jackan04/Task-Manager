@@ -89,11 +89,7 @@ function renderTasks(projectId) {
     const tasks = taskStorage.load()
     const projectTasks = tasks.filter((task) => task.projectId === projectId)
 
-    if(projectTasks.length === 0){
-        const noTasksMessage = document.createElement("p")
-        noTasksMessage.textContent = "No tasks in this project yet, create on with the help of the button in the bottom right corner."
-        app.appendChild(noTasksMessage)
-    }
+
 
     projectTasks.forEach(task => {
         const listItem = document.createElement("li")
