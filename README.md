@@ -17,10 +17,13 @@ All data is stored locally in your browser using localStorage, ensuring privacy 
 ## Still to be implemented
 Some planned features and improvements include:
 
-- **Delete individual tasks:** Currently, you can only delete entire projects. Task-level deletion is coming.
-- **Today view:** A centralized view showing all tasks due today.
-- **Task indicators:** Visual cues (e.g. icons or styling) to show when a task includes notes or a due date.
-- **Icons:** Add consistent iconography across the app to improve usability and visual design.
+- Add a welcome/ help message 
+- Add sorting for completed tasks
+- Add the option to hide completed tasks
+- Add option to delete individual tasks
+- Add a Today view
+- Task indicators: Visual cues (e.g. icons or styling) to show when a task includes notes or a due date.
+- Icons: Add consistent iconography across the app to improve usability and visual design.
 
 
 ## Getting Started
