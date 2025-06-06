@@ -9,6 +9,7 @@ const projects = projectStorage.load()
 function addNewTask(title, notes, date, projectId){
 
     if(title){
+        const tasks = taskStorage.load()
         const newTask = new Task(title, notes, date, projectId)
         tasks.push(newTask)
         taskStorage.save(tasks)

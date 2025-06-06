@@ -245,5 +245,5 @@ function renderProjectsList() {
     buttonAddNewProject.addEventListener("click", renderNewProjectForm)
 }
 
-export {renderProjectsList, renderProjectPage }
+export {renderProjectsList, renderProjectPage, renderTasks }
 
