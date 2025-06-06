@@ -2,7 +2,6 @@ const taskStorage = {
     
     save: (tasks) => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        console.log("Tasks saved!");
     },
     load:() =>{
         const tasksData = localStorage.getItem("tasks");
@@ -23,7 +22,6 @@ const projectStorage = {
 
     save: (projects) => {
         localStorage.setItem("projects", JSON.stringify(projects));
-        console.log("Projects saved!");
     },
 
     load: () => {

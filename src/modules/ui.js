@@ -112,6 +112,10 @@ function renderTasks(projectId) {
         listItem.appendChild(titleSpan)
         taskList.appendChild(listItem)
 
+        titleSpan.addEventListener("click", () =>{
+            showTaskDetails(task._title, task._notes, task._date)
+        })
+
         checkbox.addEventListener("click", () => {
             task.isCompleted = !task.isCompleted
             listItem.classList.toggle("completed", task.isCompleted)
@@ -124,6 +128,43 @@ function renderTasks(projectId) {
                 taskStorage.save(allTasks)
             }
         })
+    })
+}
+
+function showTaskDetails(title, notes, date) {
+    const modal = document.createElement("dialog")
+    modal.setAttribute("id", "task-details-modal")
+
+    const content = document.createElement("div")
+    content.style.display = "flex"
+    content.style.flexDirection = "column"
+    content.style.gap = "1rem"
+
+    const titleElem = document.createElement("h2")
+    titleElem.textContent = title
+
+    const notesElem = document.createElement("p")
+    notesElem.textContent = notes ? notes : "No notes for this task."
+
+    const dateElem = document.createElement("p")
+    dateElem.textContent = date ? `Due: ${date}` : "No due date set."
+
+    const closeBtn = document.createElement("button")
+    closeBtn.textContent = "Close"
+    closeBtn.className = "btn-danger"
+
+    content.appendChild(titleElem)
+    content.appendChild(notesElem)
+    content.appendChild(dateElem)
+    content.appendChild(closeBtn)
+
+    modal.appendChild(content)
+    document.body.appendChild(modal)
+    modal.showModal()
+
+    closeBtn.addEventListener("click", () => {
+        modal.close()
+        modal.remove()
     })
 }
 

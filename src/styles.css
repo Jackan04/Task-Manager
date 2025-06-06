@@ -103,11 +103,18 @@ button {
     transition: var(--transition);
 }
 
+button:focus{
+    outline: none;
+}
+
 button:hover,
-input:hover {
+input:hover, 
+.task-item:hover {
     opacity: 0.7;
     cursor: pointer;
 }
+
+
 
 .btn-neutral {
     background-color: var(--color-secondary);
@@ -146,6 +153,11 @@ input:hover {
 .task-item.completed {
     text-decoration: line-through;
     opacity: 0.7;
+}
+
+#task-details-modal{
+    width: 400px;
+    height: fit-content;
 }
 
 
@@ -250,14 +262,8 @@ p, li {
 /* =========================
    Utility
    ========================= */
-ul {
+ul, li {
     list-style: none;
-}
-
-.sidebar-item:hover {
-    width: fit-content;
-    color: var(--color-text-neutral);
-    cursor: pointer;
 }
 
 #btn-new-task {
